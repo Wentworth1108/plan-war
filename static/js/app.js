@@ -138,6 +138,25 @@ function moveEnemyR() {
     }, 10);
 }
 
+function moveBullet(){
+    int_b = setInterval(function () {
+        var img = new Image();
+        img.onload = function () {
+            for (var j = 0; j < x[3].length; j++) {
+                context.clearRect(x[3][j], y[3][j] + 1, 30, 30);
+                context.drawImage(img, x[3][j], y[3][j]--, 30, 30);
+            }
+        };
+        img.src = "images/bullet.png";
+        for (var j = 0; j < x[2].length; j++) {
+            if (y[3][j] < -30) {
+                x[3].splice(j, 1);
+                y[3].splice(j, 1);
+            }
+        }
+    }, 5);
+}
+
 function select(e) {
     var x = document.getElementsByClassName("fighting");
     if (x.length > 0) {
@@ -199,22 +218,7 @@ function shoot() {
     document.getElementById('shoot').play();
     x[3][i] = nfx + 15;
     y[3][i] = nfy - 35;
-    int_b = setInterval(function () {
-        var img = new Image();
-        img.onload = function () {
-            for (var j = 0; j < x[3].length; j++) {
-                context.clearRect(x[3][j], y[3][j] + 1, 30, 30);
-                context.drawImage(img, x[3][j], y[3][j]--, 30, 30);
-            }
-        };
-        img.src = "images/bullet.png";
-        for (var j = 0; j < x[2].length; j++) {
-            if (y[3][j] < -30) {
-                x[3].splice(j, 1);
-                y[3].splice(j, 1);
-            }
-        }
-    }, 5);
+    moveBullet();
     i++;
 }
 
@@ -503,10 +507,11 @@ function pause() {
         $("#rank").hide();
         document.getElementById('background').play();
         context.clearRect(200, 250, 60, 60);
-        createEnemy();
         moveEnemyT();
         moveEnemyR();
         moveEnemyL();
+        moveBullet();
+        createEnemy();
         int_check = setInterval(check, 5);
         int_d = setInterval(function () {
             destination--;
