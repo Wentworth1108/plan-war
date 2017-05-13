@@ -1,0 +1,54 @@
+body[background]{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+}
+.airport{
+    margin-top: 50px;
+    margin-left: -25px;
+}
+.fighter{
+    width: 120px;
+    height: 120px;
+    background-color: black;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    border: solid 2px white;
+}
+.hint{
+    font-size: 20px;
+    color: mintcream;
+    padding-top: 5px;
+    padding-left: 50px
+}
+.navbar-brand{
+    color: mintcream;
+    font-size: 20px;
+}
+.battlefield{
+    margin-top: 20px;
+    margin-left: 60px;
+}
+canvas{
+    background-image: url("../images/battlefield.jpg");
+}
+
+#title{
+    margin-left: 30px
+}
+
+#guider{
+    width: 150px;
+    height: 50px;
+    border: dotted;
+    margin-left: 25px;
+    margin-top: 70px;
+}
+
+#enemyAirport{
+    width: 200px;
+    height: 200px;
+    border: dashed black;
+    margin-top: 20px;
+}
