@@ -64,26 +64,26 @@ function createEnemy() {
             y[0][i] = 0;
             i++;
             clearInterval(int_t);
-            moveEnemyT();
+            moveEnemyT(time);
             break;
         case 1:
             x[1][i] = 0;
             y[1][i] = r * 21;
             i++;
             clearInterval(int_l);
-            moveEnemyL();
+            moveEnemyL(time);
             break;
         case 2:
             x[2][i] = 500;
             y[2][i] = r * 25;
             i++;
             clearInterval(int_r);
-            moveEnemyR();
+            moveEnemyR(time);
             break;
     }
    int_c = setTimeout(createEnemy, time * 1000);
 }
-function moveEnemyT() {
+function moveEnemyT(time) {
     int_t = setInterval(function () {
         var img = new Image();
         img.onload = function () {
@@ -99,10 +99,10 @@ function moveEnemyT() {
             }
         };
         img.src = src_t;
-    }, 10)
+    }, time*10)
 }
 
-function moveEnemyL() {
+function moveEnemyL(time) {
     int_l = setInterval(function () {
         var img = new Image();
         img.onload = function () {
@@ -116,10 +116,10 @@ function moveEnemyL() {
             }
         };
         img.src = "images/left_enemy.png";
-    }, 10);
+    }, time*10);
 }
 
-function moveEnemyR() {
+function moveEnemyR(time) {
     int_r = setInterval(function () {
         var img = new Image();
         img.onload = function () {
@@ -135,7 +135,7 @@ function moveEnemyR() {
                 y[2].splice(j, 1);
             }
         }
-    }, 10);
+    }, time*10);
 }
 
 function moveBullet(){
@@ -174,7 +174,7 @@ function select(e) {
 }
 
 function status() {
-        context.clearRect(0, 460, 120, 35);
+        context.clearRect(0, 460, 110, 35);
         context.fillStyle = "white";
         context.fillText("score : "+score, 5, 470);
         context.fillText("lifes : "+lifes, 5, 480);
@@ -261,7 +261,7 @@ function check() {
             lifes--;
         }
         for (var a = 0; a < x[3].length; a++) {
-            if ((Math.abs(x[0][j] - x[3][a]) < 60 && Math.abs(y[0][j] - y[3][a]) < 16)) {
+            if ((Math.abs(x[0][j] - x[3][a]) < 60 && Math.abs(y[0][j] - y[3][a]) < 50)) {
                 document.getElementById('hit').play();
                 collision(x[3][a], y[3][a]);
                 cx = x[0][j];
@@ -287,7 +287,7 @@ function check() {
             lifes--;
         }
         for (var b = 0; b < x[3].length; b++) {
-            if ((Math.abs(x[1][k] - x[3][b]) < 55 && Math.abs(y[1][k] - y[3][b]) < 16)) {
+            if ((Math.abs(x[1][k] - x[3][b]) < 45 && Math.abs(y[1][k] - y[3][b]) < 13)) {
                 document.getElementById('hit').play();
                 collision(x[3][b], y[3][b]);
                 cx = x[1][k];
@@ -313,7 +313,7 @@ function check() {
             lifes--;
         }
         for (var c = 0; c < x[3].length; c++) {
-            if ((Math.abs(x[2][l] - x[3][c]) < 55 && Math.abs(y[2][l] - y[3][c]) < 16)) {
+            if ((Math.abs(x[2][l] - x[3][c]) < 45 && Math.abs(y[2][l] - y[3][c]) < 13)) {
                 document.getElementById('hit').play();
                 collision(x[3][c], y[3][c]);
                 cx = x[2][l];
@@ -493,6 +493,7 @@ function pause() {
         document.getElementById('background').pause();
         $("#start").show();
         $("#hint").show();
+        $("#perRank").show();
         $("#rank").show();
         clearTimeout(int_c);
         clearInterval(int_t);
@@ -504,12 +505,13 @@ function pause() {
     }else {
         $("#start").hide();
         $("#hint").hide();
+        $("#perRank").hide();
         $("#rank").hide();
         document.getElementById('background').play();
         context.clearRect(200, 250, 60, 60);
         moveEnemyT();
-        moveEnemyR();
         moveEnemyL();
+        moveEnemyR();
         moveBullet();
         createEnemy();
         int_check = setInterval(check, 5);

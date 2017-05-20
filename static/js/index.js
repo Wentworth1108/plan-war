@@ -4,6 +4,12 @@ function showError(resp) {
     });
 }
 
+function showError(resp) {
+    resp.json().then(function (result) {
+        console.log('Error: ' + result.message);
+    });
+}
+
 $(function () {
     var vm = new Vue({
         el: '#vm',
@@ -16,6 +22,11 @@ $(function () {
         },
         created: function () {
             this.init();
+        },
+        computed: {
+                filteredItems: function () {
+                return this.records.slice(0, 10)
+            }
         },
         methods: {
             init: function () {
@@ -60,3 +71,4 @@ $(function () {
     window.vm = vm;
 
 });
+
